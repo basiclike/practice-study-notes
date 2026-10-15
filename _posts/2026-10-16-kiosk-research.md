@@ -1,3 +1,8 @@
+---
+title: "카페 주문 키오스크 이용자 불편 사전 조사"
+category_main: claude
+category_sub: claude-notes
+---
 # 카페 주문 키오스크 이용자 불편 사전 조사
 
 조사일: 2026-10-06

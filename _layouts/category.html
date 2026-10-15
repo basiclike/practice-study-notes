@@ -1,0 +1,36 @@
+---
+layout: default
+body_class: category
+---
+{%- assign main_posts = site.posts | where: "category_main", page.category_main -%}
+{%- assign posts = main_posts -%}
+{%- if page.category_sub -%}{%- assign posts = main_posts | where: "category_sub", page.category_sub -%}{%- endif -%}
+{%- assign cat = site.data.categories | where: "slug", page.category_main | first -%}
+{%- capture main_url -%}{{ '/category/' | append: page.category_main | append: '/' | relative_url }}{%- endcapture -%}
+<div class="wrap">
+  <header class="page-head" style="--c: {{ cat.color | default: '#006dd7' }}">
+    <nav class="crumbs" aria-label="위치">
+      <a href="{{ '/' | relative_url }}">홈</a><span class="sep">/</span>
+      {% if page.category_sub %}<a href="{{ main_url }}">{{ cat.name }}</a><span class="sep">/</span>{% endif %}
+      <span aria-current="page">{{ page.title }}</span>
+    </nav>
+    <h1 class="page-title"><i class="dot"></i>{{ page.title }}</h1>
+    <p class="page-desc">글 {{ posts | size }}개</p>
+    {% if cat.children %}
+    <div class="chips">
+      <a class="chip-link{% unless page.category_sub %} current{% endunless %}" href="{{ main_url }}">전체 <span class="count">{{ main_posts | size }}</span></a>
+      {% for s in cat.children %}
+      {% assign sub_posts = main_posts | where: "category_sub", s.slug %}
+      <a class="chip-link{% if page.category_sub == s.slug %} current{% endif %}" href="{{ main_url }}{{ s.slug }}/">{{ s.name }} <span class="count">{{ sub_posts | size }}</span></a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </header>
+  {% if posts.size > 0 %}
+  <div class="card-grid">
+    {% for post in posts %}{% include post-card.html post=post %}{% endfor %}
+  </div>
+  {% else %}
+  <p class="empty">이 카테고리에는 아직 글이 없습니다.</p>
+  {% endif %}
+</div>

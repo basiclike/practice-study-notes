@@ -1,3 +1,8 @@
+---
+title: "학습 기록 폴더의 규칙"
+category_main: claude
+category_sub: claude-notes
+---
 # 학습 기록 폴더의 규칙
 
 확인 낱말: 푸른고래-7

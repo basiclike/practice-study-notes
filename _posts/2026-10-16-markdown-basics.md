@@ -1,8 +1,12 @@
+---
+title: "내 학습 노트"
+category_main: github
+category_sub: github-pages
+---
 # 내 학습 노트
 
 이 사이트는 Claude와 함께 공부한 내용을 마크다운 노트로 정리해 모아 두는 곳입니다. 노트는 내 PC의 학습 기록 폴더에서 쓰고, GitHub 저장소 `study-notes`에 올리면 이 사이트에 웹 페이지로 나타납니다.
 
-노트 목록은 이 페이지 맨 아래 **내 학습 기록**에 있습니다.
 
 ## 마크다운 기본 문법 한눈에 보기
 
@@ -142,17 +146,3 @@ git push
 ```
 
 보이는 모양: [GitHub Pages 문서](https://docs.github.com/ko/pages)
-
-파일 이름으로 쓴 링크를 클릭하면 이 사이트 안에서 그 노트의 웹 페이지가 열립니다. 아래 **내 학습 기록**의 링크가 이 형식입니다.
-
-## 내 학습 기록
-
-- [AI 도구 견주기](ai-tools.md)
-- [요청을 갖춰 보낸 답과 대조](prompt-notes.md)
-- [요금제 한도와 컨텍스트 창](model-notes.md)
-- [카페 주문 키오스크 개선 프로젝트](kiosk-project.md)
-- [카페 주문 키오스크 사전 조사: 출처 대조](kiosk-facts.md)
-- [카페 주문 키오스크 이용자 불편 사전 조사](kiosk-research.md)
-- [학습 기록 폴더의 규칙](study-guide.md)
-- [만든 날짜: 2026-10-06](folder-index.md)
-- [GitHub Pages 정리](pages-notes.md)

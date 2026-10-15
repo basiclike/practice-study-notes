@@ -1,3 +1,8 @@
+---
+title: "요청을 갖춰 보낸 답과 대조"
+category_main: claude
+category_sub: claude-notes
+---
 # 요청을 갖춰 보낸 답과 대조
 
 보낸 요청: (견본) 자료를 첨부하고 네 요소를 채워 보낸 요청

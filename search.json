@@ -1,0 +1,10 @@
+---
+layout: null
+permalink: /search.json
+---
+[
+{%- for p in site.posts -%}
+{%- include cat.html post=p -%}
+{"title": {{ p.title | jsonify }}, "url": {{ p.url | relative_url | jsonify }}, "date": {{ p.date | date: "%Y.%m.%d" | jsonify }}, "category": {{ cs_name | default: ci_name | jsonify }}, "text": {{ p.content | strip_html | normalize_whitespace | jsonify }}}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]

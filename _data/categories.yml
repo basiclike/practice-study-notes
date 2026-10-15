@@ -1,0 +1,21 @@
+# 사이드바 카테고리. 위에서부터 이 순서로 보인다.
+# slug는 주소에 쓰는 영문 이름이고, 글 front matter의 category_main·category_sub에 같은 값을 쓴다.
+# color는 카테고리 점, 이름표, 썸네일 없는 글의 표지 색이다.
+- name: Claude
+  slug: claude
+  color: "#e0703f"
+  children:
+    - name: Claude 강의 노트
+      slug: claude-notes
+- name: GitHub
+  slug: github
+  color: "#4c5bd4"
+  children:
+    - name: GitHub Pages
+      slug: github-pages
+- name: 강의 자료
+  slug: lectures
+  color: "#006dd7"
+  children:
+    - name: Claude로 GitHub Pages
+      slug: claude-github-pages

@@ -1,3 +1,8 @@
+---
+title: "요금제 한도와 컨텍스트 창"
+category_main: claude
+category_sub: claude-notes
+---
 # 요금제 한도와 컨텍스트 창
 
 내 요금제: (견본) Pro

@@ -1,0 +1,11 @@
+{%- comment -%} 글 표지. thumbnail 이미지가 있으면 그 이미지, 없으면 카테고리 색 표지. cat.html을 먼저 부른다 {%- endcomment -%}
+{%- assign cv = include.post -%}
+{%- if cv.thumbnail -%}
+<img class="cover" src="{{ cv.thumbnail | relative_url }}" alt="" loading="lazy">
+{%- else -%}
+{%- assign pat = cv.title | size | modulo: 4 -%}
+<div class="cover pat-{{ pat }}" aria-hidden="true">
+  <span class="cover-label">{{ ci_name | default: site.title }}</span>
+  <span class="cover-text">{{ cv.cover_text | default: cs_name | default: ci_name | default: "노트" }}</span>
+</div>
+{%- endif -%}

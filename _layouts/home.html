@@ -1,0 +1,49 @@
+---
+layout: default
+body_class: home
+---
+{%- assign total = site.posts | size -%}
+<div class="wrap">
+  <section class="hero">
+    <div class="hero-main">
+      <p class="kicker">{{ site.kicker | default: "STUDY NOTES" }}</p>
+      <h1 class="hero-title">{{ site.title }}</h1>
+      {% if site.description %}<p class="hero-desc">{{ site.description }}</p>{% endif %}
+      <dl class="stats">
+        <div><dt>글</dt><dd>{{ total }}</dd></div>
+        <div><dt>카테고리</dt><dd>{{ site.data.categories | size }}</dd></div>
+        {% if total > 0 %}<div><dt>최근 글</dt><dd>{{ site.posts.first.date | date: "%Y.%m.%d" }}</dd></div>{% endif %}
+      </dl>
+    </div>
+    <img class="hero-avatar" src="{{ site.avatar | relative_url }}" alt="">
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2 class="section-title">카테고리</h2></div>
+    <div class="cat-cards">
+      {% for c in site.data.categories %}
+      {% assign main_posts = site.posts | where: "category_main", c.slug %}
+      <a class="cat-card" href="{{ '/category/' | append: c.slug | append: '/' | relative_url }}" style="--c: {{ c.color | default: '#006dd7' }}">
+        <span class="cat-card-top"><i class="dot"></i><span>{{ c.name }}</span><span class="count">{{ main_posts | size }}</span></span>
+        {% if c.children %}<span class="cat-card-subs">{% for s in c.children %}{{ s.name }}{% unless forloop.last %} · {% endunless %}{% endfor %}</span>{% endif %}
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-head">
+      <h2 class="section-title">최근 글</h2>
+      {% if total > 10 %}<a class="more-link" href="{{ '/archive/' | relative_url }}">전체 글 보기 →</a>{% endif %}
+    </div>
+    {% if total > 0 %}
+    {% for post in site.posts limit: 1 %}{% include post-card.html post=post featured=true %}{% endfor %}
+    <div class="card-grid">
+      {% for post in site.posts offset: 1 limit: 9 %}{% include post-card.html post=post %}{% endfor %}
+    </div>
+    {% else %}
+    <p class="empty">아직 글이 없습니다. <code>_posts</code> 폴더에 첫 글을 넣어 보세요.</p>
+    {% endif %}
+  </section>
+  {{ content }}
+</div>

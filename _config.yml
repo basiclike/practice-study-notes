@@ -1,2 +1,20 @@
-title: 나의 공부 기록
-theme: jekyll-theme-minimal
+title: 나의 학습 블로그
+description: Claude와 함께 정리한 학습 노트를 모아 둡니다
+avatar: /assets/img/avatar.svg
+timezone: Asia/Seoul
+future: true
+permalink: /posts/:title/
+excerpt_separator: ""
+kramdown:
+  syntax_highlighter_opts:
+    disable: true
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+exclude:
+  - README.md
+  - ask-template.md
+  - tools

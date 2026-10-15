@@ -1,0 +1,46 @@
+---
+layout: default
+body_class: post
+---
+{%- include cat.html post=page -%}
+{%- assign chars = content | strip_html | normalize_whitespace | size -%}
+{%- assign mins = chars | divided_by: 600 | plus: 1 -%}
+{%- if page.category_sub -%}{%- assign same = site.posts | where: "category_sub", page.category_sub -%}
+{%- elsif page.category_main -%}{%- assign same = site.posts | where: "category_main", page.category_main -%}
+{%- else -%}{%- assign same = site.posts -%}{%- endif -%}
+{%- assign i = -1 -%}
+{%- for p in same -%}{%- if p.url == page.url -%}{%- assign i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
+<div class="progress" aria-hidden="true"><span></span></div>
+<div class="post-wrap">
+  <article class="post">
+    <header class="post-head" style="--c: {{ ci_color }}">
+      <nav class="crumbs" aria-label="위치">
+        <a href="{{ '/' | relative_url }}">홈</a>
+        {% if ci_name != "" %}<span class="sep">/</span><a href="{{ ci_url }}">{{ ci_name }}</a>{% endif %}
+        {% if cs_name != "" %}<span class="sep">/</span><a href="{{ cs_url }}">{{ cs_name }}</a>{% endif %}
+      </nav>
+      <h1 class="post-title">{{ page.title }}</h1>
+      <p class="post-meta">
+        {% if ci_name != "" %}<a class="chip" href="{{ cs_url | default: ci_url }}"><i class="dot"></i>{{ cs_name | default: ci_name }}</a>{% endif %}
+        <span class="meta-text"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%Y년 %-m월 %-d일" }}</time> · {{ mins }}분 읽기</span>
+      </p>
+    </header>
+    <div id="article" class="article{% if page.path contains '.md' %} md{% endif %}">
+      {{ content }}
+    </div>
+    {% if i >= 0 %}
+    {%- assign newer_i = i | minus: 1 -%}{%- assign older_i = i | plus: 1 -%}
+    <nav class="post-nav" aria-label="같은 카테고리의 다른 글">
+      {% if same[older_i] %}{% assign o = same[older_i] %}<a class="post-nav-link prev" href="{{ o.url | relative_url }}"><small>← 이전 글</small><strong>{{ o.title }}</strong></a>{% endif %}
+      {% if newer_i >= 0 %}{% assign n = same[newer_i] %}<a class="post-nav-link next" href="{{ n.url | relative_url }}"><small>다음 글 →</small><strong>{{ n.title }}</strong></a>{% endif %}
+    </nav>
+    {% endif %}
+    {% if ci_name != "" %}<a class="back-list" href="{{ cs_url | default: ci_url }}">‹ {{ cs_name | default: ci_name }} 목록으로</a>{% endif %}
+  </article>
+  <aside class="toc" aria-label="목차">
+    <div class="toc-inner">
+      <p class="toc-title">목차</p>
+      <ol class="toc-list"></ol>
+    </div>
+  </aside>
+</div>

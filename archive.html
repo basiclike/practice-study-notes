@@ -1,0 +1,25 @@
+---
+layout: default
+title: 전체 글
+body_class: archive
+permalink: /archive/
+---
+{%- assign years = site.posts | group_by_exp: "p", "p.date | date: '%Y'" -%}
+<div class="wrap">
+  <header class="page-head">
+    <nav class="crumbs" aria-label="위치"><a href="{{ '/' | relative_url }}">홈</a><span class="sep">/</span><span aria-current="page">전체 글</span></nav>
+    <h1 class="page-title">전체 글</h1>
+    <p class="page-desc">글 {{ site.posts | size }}개</p>
+  </header>
+  {% for y in years %}
+  <section class="year">
+    <h2 class="year-title">{{ y.name }}<span>{{ y.size }}</span></h2>
+    <ul class="arch-list">
+      {% for p in y.items %}
+      {% include cat.html post=p %}
+      <li style="--c: {{ ci_color }}"><a href="{{ p.url | relative_url }}"><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%m.%d" }}</time><span class="arch-title">{{ p.title }}</span>{% if ci_name != "" %}<span class="chip"><i class="dot"></i>{{ cs_name | default: ci_name }}</span>{% endif %}</a></li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>

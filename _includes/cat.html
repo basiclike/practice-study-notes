@@ -1,0 +1,16 @@
+{%- comment -%} 글(include.post, 없으면 page)의 카테고리 이름·색·주소를 ci_*, cs_* 변수에 담는다 {%- endcomment -%}
+{%- assign cp = include.post | default: page -%}
+{%- assign ci_name = "" -%}{%- assign ci_color = "#8b95a1" -%}{%- assign ci_url = "" -%}{%- assign cs_name = "" -%}{%- assign cs_url = "" -%}
+{%- for c in site.data.categories -%}
+  {%- if c.slug == cp.category_main -%}
+    {%- assign ci_name = c.name -%}
+    {%- assign ci_color = c.color | default: "#006dd7" -%}
+    {%- capture ci_url -%}{{ '/category/' | append: c.slug | append: '/' | relative_url }}{%- endcapture -%}
+    {%- for s in c.children -%}
+      {%- if s.slug == cp.category_sub -%}
+        {%- assign cs_name = s.name -%}
+        {%- capture cs_url -%}{{ ci_url }}{{ s.slug }}/{%- endcapture -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}

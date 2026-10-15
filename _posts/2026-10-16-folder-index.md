@@ -1,3 +1,8 @@
+---
+title: "folder-index"
+category_main: claude
+category_sub: claude-notes
+---
 만든 날짜: 2026-10-06
 
 | 파일 이름 | 무엇을 담았는가 |

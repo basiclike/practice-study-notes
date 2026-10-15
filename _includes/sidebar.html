@@ -1,0 +1,58 @@
+<aside class="sidebar" id="sidebar" aria-label="사이드바">
+  <div class="side-head">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img class="brand-avatar" src="{{ site.avatar | relative_url }}" alt="">
+      <span class="brand-text">
+        <strong class="brand-name">{{ site.title }}</strong>
+        {% if site.description %}<span class="brand-desc">{{ site.description }}</span>{% endif %}
+      </span>
+    </a>
+    <button class="side-search search-open" type="button" aria-controls="search">
+      <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>글 검색</span><kbd>/</kbd>
+    </button>
+  </div>
+  <nav class="side-nav" aria-label="카테고리">
+    <a class="nav-link{% if page.url == '/' %} current{% endif %}" href="{{ '/' | relative_url }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+      <span>홈</span>
+    </a>
+    <a class="nav-link{% if page.url == '/archive/' %} current{% endif %}" href="{{ '/archive/' | relative_url }}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>전체 글</span><span class="count">{{ site.posts | size }}</span>
+    </a>
+    <p class="nav-label">카테고리</p>
+    <ul class="tree">
+      {% for c in site.data.categories %}
+      {% assign main_posts = site.posts | where: "category_main", c.slug %}
+      {% capture main_url %}{{ '/category/' | append: c.slug | append: '/' | relative_url }}{% endcapture %}
+      <li class="tree-item open" style="--c: {{ c.color | default: '#006dd7' }}">
+        <div class="tree-row">
+          <a class="tree-link{% if page.category_main == c.slug and page.category_sub == nil %} current{% endif %}" href="{{ main_url }}"><i class="dot"></i><span class="tree-name">{{ c.name }}</span><span class="count">{{ main_posts | size }}</span></a>
+          {% if c.children %}
+          <button class="tree-toggle" type="button" aria-label="{{ c.name }} 접기" aria-expanded="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          {% endif %}
+        </div>
+        {% if c.children %}
+        <ul class="tree-sub">
+          {% for s in c.children %}
+          {% assign sub_posts = main_posts | where: "category_sub", s.slug %}
+          <li><a class="sub-link{% if page.category_main == c.slug and page.category_sub == s.slug %} current{% endif %}" href="{{ main_url }}{{ s.slug }}/"><span class="tree-name">{{ s.name }}</span><span class="count">{{ sub_posts | size }}</span></a></li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </nav>
+  {% if site.github.repository_url %}
+  <div class="side-foot">
+    <a href="{{ site.github.repository_url }}">
+      <svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      <span>GitHub 저장소</span>
+    </a>
+  </div>
+  {% endif %}
+</aside>

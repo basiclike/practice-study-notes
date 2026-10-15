@@ -1,0 +1,15 @@
+{%- assign p = include.post -%}
+{%- include cat.html post=p -%}
+{%- assign chars = p.content | strip_html | normalize_whitespace | size -%}
+{%- assign mins = chars | divided_by: 600 | plus: 1 -%}
+<article class="card{% if include.featured %} card-featured{% endif %}" style="--c: {{ ci_color }}">
+  <a class="card-link" href="{{ p.url | relative_url }}">
+    <div class="card-cover">{% include cover.html post=p %}</div>
+    <div class="card-body">
+      {% if ci_name != "" %}{% if p.thumbnail or p.cover_text %}<span class="chip"><i class="dot"></i>{{ cs_name | default: ci_name }}</span>{% endif %}{% endif %}
+      <h3 class="card-title">{{ p.title }}</h3>
+      <p class="card-summary">{% if p.summary %}{{ p.summary }}{% else %}{{ p.content | strip_html | normalize_whitespace | truncate: 160 }}{% endif %}</p>
+      <p class="card-meta"><time datetime="{{ p.date | date_to_xmlschema }}">{{ p.date | date: "%Y.%m.%d" }}</time><span>{{ mins }}분 읽기</span></p>
+    </div>
+  </a>
+</article>
