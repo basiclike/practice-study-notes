@@ -146,3 +146,12 @@ git push
 파일 이름으로 쓴 링크를 클릭하면 이 사이트 안에서 그 노트의 웹 페이지가 열립니다. 아래 **내 학습 기록**의 링크가 이 형식입니다.
 
 ## 내 학습 기록
+
+- [AI 도구 견주기](ai-tools.md)
+- [요청을 갖춰 보낸 답과 대조](prompt-notes.md)
+- [요금제 한도와 컨텍스트 창](model-notes.md)
+- [카페 주문 키오스크 개선 프로젝트](kiosk-project.md)
+- [카페 주문 키오스크 사전 조사: 출처 대조](kiosk-facts.md)
+- [카페 주문 키오스크 이용자 불편 사전 조사](kiosk-research.md)
+- [학습 기록 폴더의 규칙](study-guide.md)
+- [만든 날짜: 2026-10-06](folder-index.md)
