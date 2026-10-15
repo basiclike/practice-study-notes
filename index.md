@@ -155,3 +155,4 @@ git push
 - [카페 주문 키오스크 이용자 불편 사전 조사](kiosk-research.md)
 - [학습 기록 폴더의 규칙](study-guide.md)
 - [만든 날짜: 2026-10-06](folder-index.md)
+- [GitHub Pages 정리](pages-notes.md)
